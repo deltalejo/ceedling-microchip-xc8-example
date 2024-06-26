@@ -33,8 +33,11 @@
 
 # Specify where to find mixins and any that should be enabled automatically
 :mixins:
-  :enabled: []
-  :load_paths: []
+  :load_paths:
+    - support/toolchain
+  :enabled:
+    - env.yml
+    - xc8
 
 # further details to configure the way Ceedling handles test code
 :test_build:
@@ -51,7 +54,8 @@
 # or may provide new command options. Refer to the readme in each plugin for 
 # details on how to use it.
 :plugins:
-  :load_paths: []
+  :load_paths:
+    - support/plugins
   :enabled:
     #- beep                           # beeps when finished, so you don't waste time waiting for ceedling
     - module_generator                # handy for quickly creating source, header, and test templates
@@ -71,6 +75,7 @@
     - report_tests_pretty_stdout
     #- report_tests_raw_output_log
     #- report_tests_teamcity_stdout
+    - mdb
 
 # Specify which reports you'd like from the log factory
 :report_tests_log_factory:
@@ -86,7 +91,7 @@
   #:source: .c
   #:assembly: .s
   #:dependencies: .d
-  #:object: .o
+  :object: .p1
   :executable: .elf
   #:testpass: .pass
   #:testfail: .fail
@@ -142,6 +147,10 @@
 # Configuration Options specific to CMock. See CMock docs for details
 :cmock:
   # Core conffiguration
+  :defines:
+    - CMOCK_MEM_STATIC
+    - CMOCK_MEM_SIZE=64
+    - CMOCK_MEM_ALIGN=1
   :plugins:                        # What plugins should be used by CMock?
     - :ignore
     - :callback
@@ -199,11 +208,17 @@
 # Configuration options specific to Unity. 
 :unity:
   :defines:
+    - UNITY_INCLUDE_CONFIG_H
     - UNITY_EXCLUDE_FLOAT
+    - UNITY_EXCLUDE_FLOAT_PRINT
+    - UNITY_EXCLUDE_DETAILS
+    - UNITY_POINTER_WIDTH=16
 
 # You can optionally have ceedling create environment variables for you before
 # performing the rest of its tasks.
-:environment: []
+:environment:
+  - :device: PIC16F1936
+  - :dfp: PIC12-16F1xxx_DFP/1.7.242/xc8
 
 # LIBRARIES
 # These libraries are automatically injected into the build process. Those specified as
@@ -328,6 +343,11 @@
 #   :pre_build:
 #   :post_build:
 #   :post_error:
+
+:mdb:
+  :device: "#{ENV['DEVICE']}"
+  :breakpoints:
+    - uart_end
 
 ################################################################
 # TOOLCHAIN CONFIGURATION
