@@ -1,0 +1,33 @@
+---
+:tools:
+  :test_compiler:
+    :name: xc8_test_compiler
+    :executable: xc8-cc
+    :arguments:
+      - -I"${5}"
+      - -D${6}
+      - -mcpu=#{ENV['DEVICE']}
+      - -mdfp=#{File.join(ENV['MPLABX_PATH'], 'packs/Microchip', ENV['DFP'])}
+      - -std=c99
+      - -gdwarf-3
+      - -mwarn=-9
+      - -mdefault-config-bits
+      - -merrata=default
+      - -MMD
+      - -MF ${4}
+      - -Wa,-a=${3}
+      - -c
+      - -o ${2}
+      - ${1}
+  :test_linker:
+    :name: xc8_test_linker
+    :executable: xc8-cc
+    :arguments:
+      - ${5}
+      - ${4}
+      - -mcpu=#{ENV['DEVICE']}
+      - -mdfp=#{File.join(ENV['MPLABX_PATH'], 'packs/Microchip', ENV['DFP'])}
+      - -Wl,-Map=${3}
+      - -o ${2}
+      - ${1}
+...
