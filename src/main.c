@@ -1,6 +1,6 @@
 #include "main.h"
 
-void MAIN(void)
+int MAIN(void)
 {
-	
+	return 0;
 }

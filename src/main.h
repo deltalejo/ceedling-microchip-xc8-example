@@ -7,4 +7,6 @@
 #define MAIN testable_main
 #endif
 
+int MAIN(void);
+
 #endif /* MAIN_H */
