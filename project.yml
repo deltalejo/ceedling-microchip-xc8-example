@@ -346,6 +346,12 @@
 
 :mdb:
   :device: "#{ENV['DEVICE']}"
+  :tools:
+    :sim:
+      :uart1io.uartioenabled: true
+      :uart1io.output: window
+    :snap:
+      :programoptions.pgmspeed: Max
   :breakpoints:
     - uart_end
 
