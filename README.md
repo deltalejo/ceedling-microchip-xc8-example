@@ -12,6 +12,24 @@ Clone:
 git clone --recurse-submodules https://github.com/deltalejo/ceedling-microchip-xc8-example.git
 ```
 
+Create `env.yml` file with proper paths.
+e.g.:
+
+```yaml
+---
+:environment:
+  # MPLAB X path (for packs on MPLABX installation dir)
+  - :mplabx_path: /opt/microchip/mplabx/v6.20
+  # Device Packs path (for packs on user installation dir)
+  - :dfp_path: ~/.mchp_packs
+  # Compilers paths
+  - :xc8_path: /opt/microchip/xc8/v2.46
+  - :path:
+      - "#{ENV['XC8_PATH']}/bin"
+      - "#{ENV['PATH']}"
+...
+```
+
 Run tests on simulator:
 
 ```shell
