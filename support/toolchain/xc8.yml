@@ -6,7 +6,7 @@
     :arguments:
       - -I"${5}"
       - -D${6}
-      - -mcpu=#{ENV['DEVICE']}
+      - -mcpu=#{ENV['DEVICE'].upcase}
       - -mdfp=#{File.join(ENV['MPLABX_PATH'], 'packs/Microchip', ENV['DFP'])}
       - -std=c99
       - -gdwarf-3
@@ -25,7 +25,7 @@
     :arguments:
       - ${5}
       - ${4}
-      - -mcpu=#{ENV['DEVICE']}
+      - -mcpu=#{ENV['DEVICE'].upcase}
       - -mdfp=#{File.join(ENV['MPLABX_PATH'], 'packs/Microchip', ENV['DFP'])}
       - -Wl,-Map=${3}
       - -o ${2}
